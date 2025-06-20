@@ -9,7 +9,11 @@ function TaskForm({ initialData = {}, onSubmit }) {
   });
 
   useEffect(() => {
-    if (initialData.id) setForm(initialData);
+    // Remove priority if present in initialData
+    if (initialData.id) {
+      const { priority, ...rest } = initialData;
+      setForm(rest);
+    }
   }, [initialData]);
 
   const handleChange = (e) => {
@@ -23,33 +27,53 @@ function TaskForm({ initialData = {}, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit} className="task-form">
-      <input
-        name="title"
-        placeholder="Title"
-        value={form.title}
-        onChange={handleChange}
-        required
-      />
-      <textarea
-        name="description"
-        placeholder="Description"
-        value={form.description}
-        onChange={handleChange}
-      />
-      <select name="status" value={form.status} onChange={handleChange}>
-        <option value="todo">To Do</option>
-        <option value="in_progress">In Progress</option>
-        <option value="done">Done</option>
-      </select>
-      <input
-        type="date"
-        name="dueDate"
-        value={form.dueDate?.split("T")[0] || ""}
-        onChange={handleChange}
-      />
-      <button type="submit" className="btn">Save</button>
+      <h2>{initialData.id ? "Edit Task" : "Create New Task"}</h2>
+      
+      <div className="form-group">
+        <label>Title *</label>
+        <input
+          name="title"
+          placeholder="e.g., Complete project report"
+          value={form.title}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Description</label>
+        <textarea
+          name="description"
+          placeholder="Add details..."
+          value={form.description}
+          onChange={handleChange}
+          rows="3"
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Status</label>
+        <select name="status" value={form.status} onChange={handleChange}>
+          <option value="todo">To Do</option>
+          <option value="in_progress">In Progress</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label>Due Date</label>
+        <input
+          type="date"
+          name="dueDate"
+          value={form.dueDate?.split("T")[0] || ""}
+          onChange={handleChange}
+        />
+      </div>
+
+      <button type="submit" className="btn primary">
+        {initialData.id ? "Update Task" : "Create Task"}
+      </button>
     </form>
   );
 }
-
 export default TaskForm;
