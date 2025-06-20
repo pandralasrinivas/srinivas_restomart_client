@@ -89,8 +89,34 @@ function Home() {
             <h3>Delete Task?</h3>
             <p>Are you sure you want to delete this task? This action cannot be undone.</p>
             <div className="dialog-actions">
-              <button onClick={() => setShowConfirm(false)}>Cancel</button>
-              <button onClick={deleteTask} className="btn red">Delete</button>
+              <button
+                onClick={() => setShowConfirm(false)}
+                style={{
+                  backgroundColor: "#f0f0f0",
+                  color: "#333",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                  padding: "8px 16px",
+                  marginRight: "8px",
+                  cursor: "pointer"
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={deleteTask}
+                className="btn red"
+                style={{
+                  backgroundColor: "Red",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "4px",
+                  padding: "8px 16px",
+                  cursor: "pointer"
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
