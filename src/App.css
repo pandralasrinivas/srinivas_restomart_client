@@ -1,38 +1,164 @@
-.App {
-  text-align: center;
+.container {
+  max-width: 650px;
+  margin: 2.5rem auto;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+  border-radius: 18px;
+  border: 1.5px solid #e3e8ee;
+  box-shadow: 0 12px 36px 0 rgba(31, 38, 135, 0.16);
+  padding: 2.5rem 2rem;
+  backdrop-filter: blur(2px);
+  animation: fadeInContainer 0.7s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.task-card {
+  padding: 1.6rem 2rem;
+  margin-bottom: 1.6rem;
+  margin-top: 24px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #fafdff 70%, #e3f0ff 100%);
+  box-shadow: 0 4px 20px 0 rgba(60, 72, 88, 0.13);
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid #007bff;
+  animation: fadeInCard 0.5s;
+  transition: box-shadow 0.25s, transform 0.22s, border-left 0.22s;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 0.7rem;
+}
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.task-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(60, 72, 88, 0.18);
+  transform: translateY(-2px) scale(1.01);
+  border-left: 6px solid #0056b3;
+  background: linear-gradient(90deg, #f8fafc 80%, #e3f0ff 100%);
+}
+
+/* Highlighted/strong text inside task-card */
+.task-card strong,
+.task-card .highlight {
+  color: #0056b3;
+  font-weight: 700;
+  background: linear-gradient(90deg, #e3f0ff 60%, #fafdff 100%);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 1.08em;
+  letter-spacing: 0.01em;
+  box-decoration-break: clone;
+}
+
+/* Add a container for buttons inside task-card */
+.task-card .card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Optional: Ensure buttons don't stretch full width inside card-actions */
+.task-card .card-actions .btn {
+  width: auto;
+  min-width: 90px;
+}
+
+.task-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: #374151;
+  letter-spacing: 0.02em;
+  font-size: 1.04rem;
+}
+
+.task-form input,
+.task-form textarea,
+.task-form select {
+  display: block;
+  width: 90%;
+  margin: 0.7rem 0 1.2rem 0;
+  padding: 0.85rem 1.1rem 0.5rem 1.1rem;
+  font-size: 1.08rem;
+  color: #22223b;
+  border: none;
+  border-bottom: 2px solid #e3e8ee;
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-bottom 0.2s, background 0.2s, transform 0.15s;
+  outline: none;
+  appearance: none;
+  background-color: transparent;
+}
+.task-form input:focus,
+.task-form textarea:focus,
+.task-form select:focus {
+  background: transparent;
+  border-bottom: 2px solid #007bff;
+  box-shadow: none;
+  transform: scale(1.02);
+}
+
+.task-form input::placeholder,
+.task-form textarea::placeholder {
+  color: #a0aec0;
+  opacity: 1;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  font-style: italic;
+}
+
+.btn {
+  padding: 0.5rem 1.2rem;
+  margin: 0.3rem 0.2rem;
+  background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
   color: white;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 16px 0 rgba(0,123,255,0.10);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 4px 0 rgba(0,123,255,0.10);
+}
+.btn:hover {
+  background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 6px 24px 0 rgba(0,123,255,0.16);
 }
 
-.App-link {
-  color: #61dafb;
+.btn.red {
+  background: linear-gradient(90deg, #d9534f 60%, #b52a27 100%);
+}
+.btn.red:hover {
+  background: linear-gradient(90deg, #b52a27 60%, #d9534f 100%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar {
+  width: 8px;
+  background: #f5f7fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #cfd8dc;
+  border-radius: 8px;
+}
+
+/* Add subtle fade-in for the whole container */
+@keyframes fadeInContainer {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
